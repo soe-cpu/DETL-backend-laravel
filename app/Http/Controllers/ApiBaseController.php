@@ -22,11 +22,12 @@ class ApiBaseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function sendErrorResponse($error, $errorMessages = [], $code = 400)
+    public function sendErrorResponse($error = null, $errorMessage = null, $code = 200)
     {
     	$response = [
             'success' => false,
-            'message' => $error,
+            'message' => $errorMessage,
+            'validate_error_message' => $error,
             'status' => 400
         ];
         if(!empty($errorMessages)){
@@ -35,23 +36,5 @@ class ApiBaseController extends Controller
         return response()->json($response, $code);
     }
 
-    public function sendMessageResponse($message)
-    {
-    	$response = [
-            'success' => true,
-            'message' => $message,
-            'status' => 200
-        ];
-        return response()->json($response, 200);
-    }
 
-    public function sendErrorMessageResponse($message)
-    {
-    	$response = [
-            'success' => false,
-            'message' => $message,
-            'status' => 400
-        ];
-        return response()->json($response, 400);
-    }
 }
