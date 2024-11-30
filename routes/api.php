@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\ItemController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\ApiAuthController;
@@ -28,4 +29,11 @@ Route::group(["middleware" => 'auth:sanctum'], function () {
     Route::post('categories/create', [CategoryController::class, 'create']);
     Route::post('categories/update/{id}', [CategoryController::class, 'update']);
     Route::delete('categories/delete/{id}', [CategoryController::class, 'delete']);
+
+
+    // Category
+    Route::get('items', [ItemController::class, 'index']);
+    Route::post('items/create', [ItemController::class, 'create']);
+    Route::post('items/update/{id}', [ItemController::class, 'update']);
+    Route::delete('items/delete/{id}', [ItemController::class, 'delete']);
 });

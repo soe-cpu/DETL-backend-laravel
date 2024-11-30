@@ -51,7 +51,7 @@ class CategoryController extends ApiBaseController
                 'user_id' => $auth->id
             ]);
 
-            return $this->sendResponse($category, 'Category created successfully!');
+            return $this->sendResponse(null, 'Category created successfully!');
         }  catch (Exception $e) {
             return $this->sendErrorResponse($e->getMessage());
         }
@@ -68,9 +68,9 @@ class CategoryController extends ApiBaseController
                 return $this->sendErrorResponse($validate->errors());
             }
 
-            $id = Category::where('id', $id)->first();
+            $c = Category::where('id', $id)->first();
 
-            if($auth->id != $id->user_id){
+            if($auth->id != $c->user_id){
                 return $this->sendErrorResponse(null, 'You can not updated!');
             }
 
